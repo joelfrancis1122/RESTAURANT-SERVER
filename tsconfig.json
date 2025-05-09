@@ -25,6 +25,9 @@
     "forceConsistentCasingInFileNames": true,
     "baseUrl": "./src",
     "paths": {
+      "adapter/*": ["adapter/*"],
+      "config/*": ["config/*"],
+      "framework/*": ["framework/*"],
       "@domain/*": ["domain/*"],
       "@application/*": ["application/*"],
       "@infrastructure/*": ["infrastructure/*"]

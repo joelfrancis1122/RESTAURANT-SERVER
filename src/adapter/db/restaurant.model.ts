@@ -1,44 +1,34 @@
-// src/adapter/db/restaurant.model.ts
-import { DataTypes, Model } from 'sequelize';
-import sequelize from './connectDB';
-import { Restaurant } from '../../domain/entities/restaurant';
+import mongoose, { Schema, Document } from "mongoose";
 
-class RestaurantModel extends Model<Restaurant> implements Restaurant {
-  public id!: number;
-  public name!: string;
-  public address!: string;
-  public contact!: string;
-  public readonly createdAt!: Date;
-  public readonly updatedAt!: Date;
+export interface IRestaurant extends Document {
+  name: string;
+  address: string;
+  contact: string;
+  createdAt: Date;
+  updatedAt: Date;
 }
 
-RestaurantModel.init(
+const RestaurantSchema: Schema = new Schema(
   {
-    id: {
-      type: DataTypes.INTEGER,
-      autoIncrement: true,
-      primaryKey: true,
-    },
     name: {
-      type: DataTypes.STRING(100),
-      allowNull: false,
+      type: String,
+      required: true,
+      trim: true,
     },
     address: {
-      type: DataTypes.STRING(255),
-      allowNull: false,
+      type: String,
+      required: true,
+      trim: true,
     },
     contact: {
-      type: DataTypes.STRING(20),
-      allowNull: false,
+      type: String,
+      required: true,
+      trim: true,
     },
   },
   {
-    sequelize,
-    modelName: 'Restaurant',
-    tableName: 'restaurants',
     timestamps: true,
-    underscored: true,
   }
 );
 
-export default RestaurantModel;
+export default mongoose.model<IRestaurant>("Restaurant", RestaurantSchema);

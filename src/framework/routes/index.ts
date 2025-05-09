@@ -1,9 +1,9 @@
-import { Router } from "express"
 import userRoutes from "./route/user.route";
 
-const router = Router()
+import express from "express";
+const router = express.Router();
 
-router.use("/user", userRoutes);
+router.use("/restaurants", userRoutes);
 
 
 
