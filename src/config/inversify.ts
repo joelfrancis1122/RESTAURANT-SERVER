@@ -1,5 +1,5 @@
 import { IRestaurantRepository } from "@domain/repositories/Irestaurant.repository";
-import { IUseCase } from "@domain/service/IUserUseCase";
+import { IUseCase } from "@domain/usecase/IUserUseCase";
 import  UserController from "adapter/controllers/user.controller";
 import { RestaurantRepository } from "adapter/repositories/restaurant.repository";
 import { Container } from "inversify";
