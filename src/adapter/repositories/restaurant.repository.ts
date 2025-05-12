@@ -22,7 +22,7 @@ export class RestaurantRepository implements IRestaurantRepository {
 
   async findAll(): Promise<Restaurant[]> {
     const restaurants = await prisma.restaurant.findMany();
-    return restaurants.map((r) => ({
+    return restaurants.map((r:any) => ({
       id: r.id,
       name: r.name,
       address: r.address,
