@@ -47,13 +47,12 @@ export default class UserController {
       console.log(error)
     }
   }
+
   deleteRestaurant = async (req: Request, res: Response) => {
     try {
       const id = req.params.id;
       console.log(id, "JOELLL");
-
       const deleted = await this._useCase.delete(id);
-
       if (deleted) {
          res.status(200).json({ message: "Restaurant deleted successfully" });
       } else {
@@ -65,4 +64,4 @@ export default class UserController {
     }
   }
 
-}
+} 
