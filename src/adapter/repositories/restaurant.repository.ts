@@ -22,7 +22,7 @@ export class RestaurantRepository implements IRestaurantRepository {
 
   async findAll(): Promise<Restaurant[]> {
     const restaurants = await prisma.restaurant.findMany();
-    return restaurants.map((r:any) => ({
+    return restaurants.map((r: any) => ({
       id: r.id,
       name: r.name,
       address: r.address,
@@ -49,9 +49,11 @@ export class RestaurantRepository implements IRestaurantRepository {
   }
   async delete(id: string): Promise<boolean> {
     try {
+      console.log("sss")
       await prisma.restaurant.delete({
         where: { id },
       });
+      console.log("sssasasas")
       return true;
     } catch (error: any) {
       if (error.code === "P2025") {
