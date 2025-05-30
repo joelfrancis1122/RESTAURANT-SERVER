@@ -17,8 +17,6 @@ export class UseCase implements IUseCase {
       contact,
     };
 
-    console.log("💡 UseCase - Creating restaurant:", restaurant);
-
     return await this._repository.save(restaurant);
   };
 

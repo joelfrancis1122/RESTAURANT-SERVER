@@ -8,14 +8,13 @@ const prisma = new PrismaClient();
 @injectable()
 export class RestaurantRepository implements IRestaurantRepository {
   async save(restaurant: Restaurant): Promise<boolean> {
-    const odi = await prisma.restaurant.create({
+    const res = await prisma.restaurant.create({
       data: {
         name: restaurant.name,
         address: restaurant.address,
         contact: restaurant.contact.toString(),
       },
     });
-    console.log(odi, "joell")
 
     return true;
   }
