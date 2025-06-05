@@ -21,10 +21,6 @@ export const testConnection = async (): Promise<void> => {
       });
     }
 
-    console.error('\n🔧 Troubleshooting steps:');
-    console.error('1. Ensure PostgreSQL is running (e.g. sudo service postgresql status)');
-    console.error('2. Check your DATABASE_URL in .env');
-    console.error('3. Confirm that the database exists and user credentials are correct');
     throw error;
   }
 };

@@ -25,9 +25,6 @@ export default class UserController {
     try {
       const { name, address, contact } = req.body
       const data = await this._useCase.create(name, address, contact)
-      if (data) {
-        console.log("worked",data)
-      }
       res.status(200).json(data)
     } catch (error) {
       console.log(error)
@@ -37,11 +34,7 @@ export default class UserController {
     try {
       const { name, address, contact } = req.body
       const id = req.query.id
-      console.log(req.body,"JOELLL",req.query)
       const data = await this._useCase.update(name, address, contact,id as string)
-      if (data) {
-        console.log("worked",data)
-      }
       res.status(200).json(data)
     } catch (error) {
       console.log(error)
@@ -51,7 +44,6 @@ export default class UserController {
   deleteRestaurant = async (req: Request, res: Response) => {
     try {
       const id = req.params.id;
-      console.log(id, "JOELLL");
       const deleted = await this._useCase.delete(id);
       if (deleted) {
          res.status(200).json({ message: "Restaurant deleted successfully" });
