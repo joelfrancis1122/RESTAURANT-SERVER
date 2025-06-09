@@ -48,11 +48,9 @@ export class RestaurantRepository implements IRestaurantRepository {
   }
   async delete(id: string): Promise<boolean> {
     try {
-      console.log("sss")
       await prisma.restaurant.delete({
         where: { id },
       });
-      console.log("sssasasas")
       return true;
     } catch (error: any) {
       if (error.code === "P2025") {
