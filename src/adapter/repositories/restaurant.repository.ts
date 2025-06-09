@@ -46,6 +46,7 @@ export class RestaurantRepository implements IRestaurantRepository {
       contact: updated.contact,
     };
   }
+  
   async delete(id: string): Promise<boolean> {
     try {
       await prisma.restaurant.delete({
