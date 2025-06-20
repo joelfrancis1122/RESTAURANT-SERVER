@@ -10,7 +10,7 @@ export class UseCase implements IUseCase {
     private _repository: IRestaurantRepository
   ) { }
 
-  create = async (name: string, address: string, contact: string): Promise<boolean> => {
+  create = async (name: string, address: string, contact: string): Promise<Restaurant|null> => {
     const restaurant: Restaurant = {
       name,
       address,
@@ -20,17 +20,18 @@ export class UseCase implements IUseCase {
     return await this._repository.save(restaurant);
   };
 
-  private generateId(): string {
-    return Math.random().toString(36).substring(2, 9);
-  }
+
 
   async getRestaurants(): Promise<Restaurant[]> {
-    return await this._repository.findAll();
+    const restaurants = await this._repository.findAll();
+    return restaurants ?? [];
   }
 
-  update = async (name: string, address: string, contact: string, id: string): Promise<Restaurant | null> => {
-    const restaurant: Restaurant = { name, address, contact, id }
-    return await this._repository.update(restaurant)
+  update = async (name: string, address: string, contact: string, id: string): Promise<Restaurant[] | null> => {
+    const restaurant: Restaurant = { name, address, contact, id };
+    // Assuming _repository.update returns a single Restaurant, wrap it in an array if not null
+    const updated = await this._repository.update(restaurant);
+    return updated ? [updated] : null;
   }
   delete = async (id: string): Promise<boolean> => {
     return await this._repository.delete(id);

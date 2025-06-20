@@ -7,7 +7,7 @@ const prisma = new PrismaClient();
 
 @injectable()
 export class RestaurantRepository implements IRestaurantRepository {
-  async save(restaurant: Restaurant): Promise<boolean> {
+  async save(restaurant: Restaurant): Promise<Restaurant | null> {
     const res = await prisma.restaurant.create({
       data: {
         name: restaurant.name,
@@ -16,7 +16,12 @@ export class RestaurantRepository implements IRestaurantRepository {
       },
     });
 
-    return true;
+    return {
+      id: res.id,
+      name: res.name,
+      address: res.address,
+      contact: res.contact,
+    };
   }
 
   async findAll(): Promise<Restaurant[]> {
@@ -46,6 +51,8 @@ export class RestaurantRepository implements IRestaurantRepository {
       contact: updated.contact,
     };
   }
+
+
   
   async delete(id: string): Promise<boolean> {
     try {
