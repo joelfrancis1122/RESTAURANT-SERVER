@@ -23,6 +23,7 @@
           });
         });
 
+        
       } catch (error) {
         console.error('\n🔴 Failed to start server:');
         if (error instanceof Error) {

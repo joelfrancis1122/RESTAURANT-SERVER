@@ -20,6 +20,7 @@ export const testConnection = async (): Promise<void> => {
         stack: error.stack,
       });
     }
+    
 
     console.error("\n🔧 Troubleshooting steps:");
     console.error("1. Ensure your Neon project is active.");
