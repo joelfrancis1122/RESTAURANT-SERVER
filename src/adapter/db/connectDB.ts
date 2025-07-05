@@ -1,19 +1,19 @@
 // adapter/db/connectDB.ts
 import dotenv from "dotenv";
-import { neon } from "@neondatabase/serverless";
+import { PrismaClient } from "@prisma/client";
 
 dotenv.config();
 
-const sql = neon(process.env.DATABASE_URL!);
+const prisma = new PrismaClient();
 
 export const testConnection = async (): Promise<void> => {
   try {
-    console.log("⌛ Testing Neon database connection...");
+    console.log("⌛ Testing database connection...");
 
-    const result = await sql`SELECT NOW() as current_time`;
-    console.log("✅ Neon DB connection successful! Current time:", result[0].current_time);
+    const result = await prisma.$queryRaw`SELECT NOW() as current_time`;
+    console.log("✅ Database connection successful! Current server time:", result);
   } catch (error) {
-    console.error("❌ Neon DB connection failed:");
+    console.error("❌ Database connection failed:");
     if (error instanceof Error) {
       console.error("Error details:", {
         message: error.message,
@@ -23,10 +23,10 @@ export const testConnection = async (): Promise<void> => {
 
     console.error("\n🔧 Troubleshooting steps:");
     console.error("1. Ensure your Neon project is active.");
-    console.error("2. Check DATABASE_URL in your .env file.");
-    console.error("3. Make sure your IP access settings in Neon allow this connection.");
+    console.error("2. Check your DATABASE_URL in .env.");
+    console.error("3. Confirm the database and tables exist.");
     throw error;
   }
 };
 
-export default sql; // You can import this anywhere for queries
+export default prisma;
